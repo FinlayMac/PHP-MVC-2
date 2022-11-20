@@ -1,0 +1,136 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+    text-decoration: none;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    box-sizing: border-box;
+    color: var(--book-black);
+}
+
+:root {
+    --book-black: #0D0D0D;
+    --book-light-red: #D9674E;
+    --book-red: #8C3C2A;
+    --book-white: #F2E9D8;
+    --book-blue: #51768C;
+
+}
+
+/*Makes the media take up the available page width*/
+img,
+object,
+embed,
+video {
+    max-width: 100%;
+}
+
+
+a {
+    color: var(--book-blue);
+}
+
+h1 {
+    margin-bottom: 30px;
+}
+header {
+    width: 100%;
+    height: auto;
+    background-color: var(--book-light-red);
+}
+
+nav ul {
+    display: flex;
+    flex-direction: column;
+
+}
+
+nav ul li {
+    flex: 1;
+    text-align: center;
+    font-size: 1.75em;
+    font-weight: bold;
+    padding: 10px;
+    color: var(--book-black);
+}
+
+.spacer {
+    width: 100%;
+    height: 7px;
+    background-color: var(--book-red);
+}
+
+main {
+    width: 100%;
+    background-color: var(--book-white);
+    padding: 30px;
+}
+
+
+.book-grid {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr;
+    grid-auto-rows: 1fr;
+    gap: 10px;
+    text-align: center;
+}
+
+.book-grid p{
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    height: 2.5em;
+}
+
+
+footer {
+    width: 100%;
+    background-color: var(--book-light-red);
+    height: 50px;
+}
+
+@media only screen and (min-width: 300px) {
+    .book-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+
+@media only screen and (min-width: 500px) {
+    nav ul {
+        flex-direction: row;
+
+    }
+
+    nav ul li {
+        text-align: left;
+        flex-grow: 0;
+        flex-basis: auto;
+        padding: 15px 30px;
+    }
+
+    .book-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+
+@media only screen and (min-width: 800px) {
+
+    .book-grid {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 240px));
+    }
+}
+
+/*For bouncer JS*/
+
+.error {
+    border-color: red;
+}
+
+.error-message {
+    color: red;
+    font-style: italic;
+    margin-bottom: 20px;
+    font-size: 80%;
+}

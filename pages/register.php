@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Shop</title>
+    <link rel="stylesheet" href="/css/bookshop.css">
+    <script defer src="/scripts/bouncer.min.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/index.php">Home Page</a></li>
+                <li>About Us</li>
+                <li>Contact Us</li>
+            </ul>
+        </nav>
+
+
+        <nav>
+            <ul>
+                <?php
+                session_start();
+                if (isset($_SESSION['username'])) {
+                    echo '<li>Welcome ' . $_SESSION['username'] . '</li>';
+                    echo '<li><a href="/pages/logout.php">Log Out</a></li>';
+                } else {
+                    echo '<li><a href="/pages/login.php">Log In</a></li>';
+                }
+                ?>
+            </ul>
+        </nav>
+    </header>
+    <div class="spacer"></div>
+    <main>
+
+        <h1>Please enter your log in details</h1>
+
+
+        <form action="/private/register_user.php" method="post">
+
+
+            <label for="username">Please provide an email address</label><br>
+            <input id="username" name="user_email" type="email" placeholder="eye@read.books" minlength="3" required><br><br>
+
+            <label for="password">Please create a password at least 8 characters long</label><br>
+            <input id="password" name="user_password" type="password" placeholder="**********" minlength="8" required><br><br>
+
+            <label for="password">Please confirm your password</label><br>
+            <input id="password2" name="user_password2" type="password" placeholder="**********" minlength="8" required data-bouncer-match="#password"><br><br>
+
+            <input type="submit" value="Create Account">
+
+        </form>
+
+    </main>
+    <footer>
+
+
+    </footer>
+
+</body>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+
+        var validate = new Bouncer('form', {
+
+            customValidations: {
+                valueMismatch: function(field) {
+
+                    //check the current input field to see if it has the attribute:
+                    var selector = field.getAttribute('data-bouncer-match');
+                    if (!selector) return false
+
+                    //find the 2nd input that it should match
+                    var otherField = field.form.querySelector(selector);
+                    if (!otherField) return false;
+
+                    // Compare the two field values
+                    // We use a negative comparison here because if they do match, the field validates
+                    // We want to return true for failures, which can be confusing
+                    return otherField.value !== field.value;
+                }
+            },
+            messages: {
+                valueMismatch: 'Please make sure your passwords match.',
+            }
+        });
+    });
+</script>
+
+</html>
