@@ -16,7 +16,7 @@
         <nav>
             <ul>
                 <li><a href="/index.php">Home Page</a></li>
-                <li>About Us</li>
+                <li><a href="/pages/about-us.php">About Us</a></li>
                 <li>Contact Us</li>
             </ul>
         </nav>
@@ -39,8 +39,8 @@
 
         <h1>Please enter your log in details</h1>
 
-
-        <form action="/private/login_user.php" method="post">
+        <?php include_once($_SERVER['DOCUMENT_ROOT'] . '/private/login-user.php');?>
+        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 
             <a href="register.php">Register An Account Here</a> <br><br>
             <label for="username">Username</label><br>

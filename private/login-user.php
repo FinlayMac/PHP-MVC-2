@@ -9,14 +9,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //check if password is long enough
     if (strlen($user_password) < 8) {
         echo "password less than 8 characters in length";
-        header("refresh:2; url=/pages/login.php");
         return;
     }
 
     //check if email is valid type
     if (!filter_var($user_email, FILTER_VALIDATE_EMAIL)) {
         echo "Invalid email format";
-        header("refresh:2; url=/pages/login.php");
         return;
     }
 
@@ -30,14 +28,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //if query was not successful
     if ($result == false) {
         echo "query not successful";
-        header("refresh:2; url=/pages/login.php");
         return;
     }
 
     //If no match with email address
     if ($result->num_rows == 0) {
         echo "No Account Found";
-        header("refresh:2; url=/pages/login.php");
         return;
     }
 
@@ -47,9 +43,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         session_start();
         $_SESSION['username'] = $account['user_email'];
         echo "Correct Password";
+        $stmt->close();
+        $conn->close();
+        header("refresh:0; url=/");
     } else {
         echo "Incorrect Password";
-        header("refresh:2; url=/pages/login.php");
         return;
     }
 }

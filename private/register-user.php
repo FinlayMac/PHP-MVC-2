@@ -10,21 +10,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //check if passwords match
     if ($user_password != $user_confirm_password) {
         echo "passwords must match";
-        header("refresh:2; url=/pages/register.php");
         return;
     }
 
     //check if password is long enough
     if (strlen($user_password) < 8) {
         echo "password less than 8 characters in length";
-        header("refresh:2; url=/pages/register.php");
         return;
     }
 
     //check if email is valid type
     if (!filter_var($user_email, FILTER_VALIDATE_EMAIL)) {
         echo "Invalid email format";
-        header("refresh:2; url=/pages/register.php");
         return;
     }
 
@@ -36,7 +33,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result->num_rows > 0) {
         echo "Email already in the database";
-        header("refresh:2; url=/pages/register.php");
         return;
     }
 

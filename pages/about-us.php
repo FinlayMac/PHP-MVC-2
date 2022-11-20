@@ -36,15 +36,8 @@
     <div class="spacer"></div>
     <main>
 
-        <h1>Check out all our books:</h1>
+        <h1>About the Company:</h1>
 
-        <?php
-        include_once($_SERVER['DOCUMENT_ROOT'] . '/controllers/book-controller.php');
-
-        $bookController = new BookController();
-        $bookController->invoke();
-
-        ?>
 
     </main>
     <footer>

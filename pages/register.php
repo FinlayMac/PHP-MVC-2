@@ -16,7 +16,7 @@
         <nav>
             <ul>
                 <li><a href="/index.php">Home Page</a></li>
-                <li>About Us</li>
+                <li><a href="/pages/about-us.php">About Us</a></li>
                 <li>Contact Us</li>
             </ul>
         </nav>
@@ -41,9 +41,13 @@
 
         <h1>Please enter your log in details</h1>
 
+        <?php include_once($_SERVER['DOCUMENT_ROOT'] . '/private/register-user.php'); ?>
 
-        <form action="/private/register_user.php" method="post">
-
+        <!-- The post will be sent to the same page the form is in
+         The action attribute can't be left blank or it will result in invalid code  https://html.spec.whatwg.org/#attr-fs-action
+         Why PHP_SELF? See this: https://www.w3schools.com/php/php_form_validation.asp
+         Not including an action attribute opens the risk of a click jacking attack: http://blog.andlabs.org/2010/03/bypassing-csrf-protections-with.html -->
+        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
 
             <label for="username">Please provide an email address</label><br>
             <input id="username" name="user_email" type="email" placeholder="eye@read.books" minlength="3" required><br><br>
