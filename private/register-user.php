@@ -19,6 +19,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         return;
     }
 
+    // Remove all illegal characters from email
+    $user_email = filter_var($user_email, FILTER_SANITIZE_EMAIL);
+
     //check if email is valid type
     if (!filter_var($user_email, FILTER_VALIDATE_EMAIL)) {
         echo "Invalid email format";

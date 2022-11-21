@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Shop</title>
+    <title>Book Shop - About Us</title>
     <link rel="stylesheet" href="/css/bookshop.css">
 </head>
 
@@ -14,7 +15,7 @@
     <header>
         <nav>
             <ul>
-                <li><a href="/index.php">Home Page</a></li>
+                <li><a href="/index.php">Home</a></li>
                 <li><a href="/pages/about-us.php">About Us</a></li>
                 <li>Contact Us</li>
             </ul>
@@ -22,7 +23,6 @@
         <nav>
             <ul>
                 <?php
-                session_start();
                 if (isset($_SESSION['username'])) {
                     echo '<li>Welcome ' . $_SESSION['username'] . '</li>';
                     echo '<li><a href="/pages/logout.php">Log Out</a></li>';

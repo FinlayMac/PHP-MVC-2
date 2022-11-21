@@ -12,6 +12,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         return;
     }
 
+    // Remove all illegal characters from email
+    $user_email = filter_var($user_email, FILTER_SANITIZE_EMAIL);
+
     //check if email is valid type
     if (!filter_var($user_email, FILTER_VALIDATE_EMAIL)) {
         echo "Invalid email format";
@@ -40,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $account = $result->fetch_assoc();
 
     if (password_verify($user_password, $account["user_password"])) {
-        session_start();
+        //session started on per page basis
         $_SESSION['username'] = $account['user_email'];
         echo "Correct Password";
         $stmt->close();
