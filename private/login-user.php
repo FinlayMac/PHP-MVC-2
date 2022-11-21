@@ -2,13 +2,16 @@
 include_once($_SERVER['DOCUMENT_ROOT'] . '/private/connection.php');
 $conn = connect();
 
+$emailErr = "";
+$passwordErr = "";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_email = validateInput($_POST["user_email"]);
     $user_password = validateInput($_POST["user_password"]);
 
     //check if password is long enough
     if (strlen($user_password) < 8) {
-        echo "password less than 8 characters in length";
+        $passwordErr = "* password less than 8 characters in length";
         return;
     }
 
@@ -17,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     //check if email is valid type
     if (!filter_var($user_email, FILTER_VALIDATE_EMAIL)) {
-        echo "Invalid email format";
+        $emailErr = "* Invalid email format";
         return;
     }
 
@@ -36,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     //If no match with email address
     if ($result->num_rows == 0) {
-        echo "No Account Found";
+        $emailErr = "* No Account With this Email found";
         return;
     }
 
@@ -50,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $conn->close();
         header("refresh:0; url=/");
     } else {
-        echo "Incorrect Password";
+        $passwordErr = "* Incorrect Password";
         return;
     }
 }
