@@ -5,7 +5,7 @@ $conn = connect();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_email = validateInput($_POST["user_email"]);
     $user_password = validateInput($_POST["user_password"]);
-    $user_confirm_password = validateInput($_POST["user_password"]);
+    $user_confirm_password = validateInput($_POST["user_password2"]);
 
     //check if passwords match
     if ($user_password != $user_confirm_password) {
