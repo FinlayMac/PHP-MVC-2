@@ -50,13 +50,16 @@
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
 
             <label for="username">Please provide an email address</label><br>
-            <input id="username" name="user_email" type="email" placeholder="eye@read.books" minlength="3" required><br><br>
+            <input id="username" name="user_email" type="email"  value="<?php if (isset($user_email)) echo $user_email;?>" placeholder="eye@read.books" minlength="3" required>
+            <div class="error-message"><?php echo $emailErr; ?></div><br><br>
 
             <label for="password">Please create a password at least 8 characters long</label><br>
-            <input id="password" name="user_password" type="password" placeholder="**********" minlength="8" required><br><br>
+            <input id="password" name="user_password" type="password" placeholder="**********" minlength="8" required><br>
+            <div class="error-message"><?php echo $passwordErr; ?></div><br><br>
 
             <label for="password">Please confirm your password</label><br>
-            <input id="password2" name="user_password2" type="password" placeholder="**********" minlength="8" required data-bouncer-match="#password"><br><br>
+            <input id="password2" name="user_password2" type="password" placeholder="**********" minlength="8" required data-bouncer-match="#password">
+            <div class="error-message"><?php echo $password2Err; ?></div><br><br>
 
             <input type="submit" value="Create Account">
 
