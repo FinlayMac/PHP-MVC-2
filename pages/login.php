@@ -39,18 +39,20 @@
 
         <h1>Please enter your log in details</h1>
 
-        <?php include_once($_SERVER['DOCUMENT_ROOT'] . '/private/login-user.php'); ?>
+        <?php include_once($_SERVER['DOCUMENT_ROOT'] . '/private/login-user.php');
+              include_once($_SERVER['DOCUMENT_ROOT'] . '/views/error-message-view.php'); ?>
+
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
 
             <a href="register.php">Register An Account Here</a> <br><br>
             <label for="username">Username</label><br>
             <input id="username" name="user_email" type="email" value="<?php if (isset($user_email)) echo $user_email;?>" placeholder="eye@read.books" minlength="3" required>
-            <div class="error-message"><?php echo $emailErr; ?></div><br><br>
+             <?php new ErrorMessage($emailErr); ?>
 
             <label for="password">Password</label><br>
             <input id="password" name="user_password" type="password" placeholder="**********" minlength="8" required>
-            <div class="error-message"><?php echo $passwordErr; ?></div><br><br>
-
+            <?php new ErrorMessage($passwordErr); ?>
+            
             <input type="submit" value="Log In">
 
         </form>

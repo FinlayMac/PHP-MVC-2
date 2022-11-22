@@ -41,8 +41,8 @@
 
         <h1>Please enter your log in details</h1>
 
-        <?php include_once($_SERVER['DOCUMENT_ROOT'] . '/private/register-user.php'); ?>
-
+        <?php include_once($_SERVER['DOCUMENT_ROOT'] . '/private/register-user.php');
+              include_once($_SERVER['DOCUMENT_ROOT'] . '/views/error-message-view.php'); ?>
 
         <!-- The post will be sent to the same page the form is in
          The action attribute can't be left blank or it will result in invalid code  https://html.spec.whatwg.org/#attr-fs-action
@@ -52,15 +52,15 @@
 
             <label for="username">Please provide an email address</label><br>
             <input id="username" name="user_email" type="email" value="<?php if (isset($user_email)) echo $user_email; ?>" placeholder="eye@read.books" minlength="3" required>
-            <div class="error-message"><?php echo $emailErr; ?></div><br><br>
+            <?php new ErrorMessage($emailErr); ?>
 
             <label for="password">Please create a password at least 8 characters long</label><br>
             <input id="password" name="user_password" type="password" placeholder="**********" minlength="8" required><br>
-            <div class="error-message"><?php echo $passwordErr; ?></div><br><br>
+            <?php new ErrorMessage($passwordErr); ?>
 
             <label for="password">Please confirm your password</label><br>
             <input id="password2" name="user_password2" type="password" placeholder="**********" minlength="8" required data-bouncer-match="#password">
-            <div class="error-message"><?php echo $password2Err; ?></div><br><br>
+            <?php new ErrorMessage($password2Err); ?>
 
             <input type="submit" value="Create Account">
 

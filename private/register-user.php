@@ -36,8 +36,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $emailErr = "* Email already in the database";
     }
 
-    return; //temp
-
-    $userModel->createNewAccount($user_email, $user_password);
-    header("refresh:0; url=/pages/login.php");
+    if ($emailErr == "" && $passwordErr == "" && $password2Err == "") {
+        $userModel->createNewAccount($user_email, $user_password);
+        header("refresh:0; url=/pages/login.php");
+    }
 }
