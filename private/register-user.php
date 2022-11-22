@@ -1,5 +1,6 @@
 <?php
 include_once($_SERVER['DOCUMENT_ROOT'] . '/models/user-model.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/models/user.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/utils/sanitising.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/utils/validation.php');
 
@@ -31,11 +32,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $result = $userModel->getAllUsersUsingEmail($user_email);
 
-    if ($result->num_rows > 0) {
+    if (count($result) > 0) {
         $emailErr = "* Email already in the database";
     }
 
-    return;
+    return; //temp
 
     $userModel->createNewAccount($user_email, $user_password);
     header("refresh:0; url=/pages/login.php");

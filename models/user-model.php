@@ -14,8 +14,20 @@ class UserModel
         $stmt->execute();
         $result = $stmt->get_result();
 
+        $AllUsers = array();
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $nextUser = new User(
+                    $row["user_email"],
+                    $row["user_password"]
+                );
+                array_push($AllUsers, $nextUser);
+            }
+        }
+
         $conn->close();
-        return $result;
+        return $AllUsers;
     }
 
     public function getFirstUserUsingEmail($user_email)

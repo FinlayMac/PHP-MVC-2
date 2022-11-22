@@ -1,5 +1,6 @@
 <?php
 include_once($_SERVER['DOCUMENT_ROOT'] . '/models/user-model.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/models/user.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/utils/sanitising.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/utils/validation.php');
 
