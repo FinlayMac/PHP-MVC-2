@@ -1,12 +1,14 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'] . '/private/connection.php');
-$conn = connect();
+include_once($_SERVER['DOCUMENT_ROOT'] . '/models/user-model.php');
 
 $emailErr = "";
 $passwordErr = "";
 $password2Err = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $userModel = new UserModel();
+
     $user_email = validateInput($_POST["user_email"]);
     $user_password = validateInput($_POST["user_password"]);
     $user_confirm_password = validateInput($_POST["user_password2"]);
@@ -32,26 +34,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         return;
     }
 
-    //check if email in DB
-    $stmt = $conn->prepare("SELECT * FROM users WHERE user_email = ?");
-    $stmt->bind_param("s", $user_email);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $result = $userModel->getAllUsersUsingEmail($user_email);
 
     if ($result->num_rows > 0) {
         $emailErr = "* Email already in the database";
         return;
     }
 
-    //hashes password and inserts into database
-    $hash_password = password_hash($user_password, PASSWORD_DEFAULT);
-
-    $stmt = $conn->prepare("INSERT INTO users (user_email, user_password) VALUES (?, ?)");
-    $stmt->bind_param("ss", $user_email, $hash_password);
-    $stmt->execute();
-
-    $stmt->close();
-    $conn->close();
+    $userModel->createNewAccount($user_email, $user_password);
     header("refresh:0; url=/pages/login.php");
 }
 

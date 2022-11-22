@@ -43,6 +43,7 @@
 
         <?php include_once($_SERVER['DOCUMENT_ROOT'] . '/private/register-user.php'); ?>
 
+
         <!-- The post will be sent to the same page the form is in
          The action attribute can't be left blank or it will result in invalid code  https://html.spec.whatwg.org/#attr-fs-action
          Why PHP_SELF? See this: https://www.w3schools.com/php/php_form_validation.asp
@@ -50,7 +51,7 @@
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
 
             <label for="username">Please provide an email address</label><br>
-            <input id="username" name="user_email" type="email"  value="<?php if (isset($user_email)) echo $user_email;?>" placeholder="eye@read.books" minlength="3" required>
+            <input id="username" name="user_email" type="email" value="<?php if (isset($user_email)) echo $user_email; ?>" placeholder="eye@read.books" minlength="3" required>
             <div class="error-message"><?php echo $emailErr; ?></div><br><br>
 
             <label for="password">Please create a password at least 8 characters long</label><br>
